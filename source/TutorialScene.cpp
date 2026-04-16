@@ -76,7 +76,7 @@ void TutorialScene::Update()
     }
 
     // ステップ完了後の入力待ち（Enterキーで次へ）
-    if (isWaitingNext && (CheckHitKey(KEY_INPUT_SPACE) || CheckHitKey(KEY_INPUT_RETURN)))
+    if (isWaitingNext && (CheckDownKey(KEY_INPUT_SPACE) || CheckDownKey(KEY_INPUT_RETURN)))
     {
         isWaitingNext = false;
         isStepComplete = false;
@@ -243,7 +243,7 @@ void TutorialScene::ChangeStep(Step next)
 // Step: End 
 void TutorialScene::UpdateEnd()
 {
-    if (messageTimer > 60 && CheckHitKey(KEY_INPUT_RETURN))
+    if (messageTimer > 60 && CheckDownKey(KEY_INPUT_SPACE))
     {
         nextScene = SceneType::Game; // 本編へ遷移
     }
