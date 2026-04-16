@@ -250,7 +250,12 @@ void GameScene::Draw()
 
     // オブジェクト描画
     enemyManager.Draw(camera.GetX(), camera.GetY());
-    laserSystem.Draw(player, camera.GetX(), camera.GetY());
+
+    if (!player.IsDead())
+    {
+        laserSystem.Draw(player, camera.GetX(), camera.GetY());
+    }
+
     player.Draw(camera.GetX(), camera.GetY());
     itemManager.Draw(camera.GetX(), camera.GetY());
 
