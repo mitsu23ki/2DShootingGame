@@ -58,7 +58,7 @@ public:
         }
 
         // Tキーでタイトル画面
-        if (CheckHitKey(KEY_INPUT_T))
+        if (CheckDownKey(KEY_INPUT_T))
         {
             nextScene = SceneType::Title;
         }
