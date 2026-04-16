@@ -46,10 +46,7 @@ void GameScene::Update()
         nextScene = SceneType::Title;
         return;
     }
-    if (CheckDownKey(KEY_INPUT_G)){
-        
-        nextScene = SceneType::HowToPlay;
-    }
+   
     // カットイン演出の同期
     if (enemyManager.IsCutInPlaying())
         pauseReason = PauseReason::CutIn;

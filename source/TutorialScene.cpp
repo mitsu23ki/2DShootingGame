@@ -1,6 +1,7 @@
 #include "TutorialScene.h"
 #include "DxLib.h"
 #include "AudioManager.h"
+#include "CheckKey.h"
 
 // コンストラクタ：各メンバの初期化
 TutorialScene::TutorialScene()
@@ -84,15 +85,21 @@ void TutorialScene::Update()
     }
 
     // Fキーでメニュー画面
-    if (CheckHitKey(KEY_INPUT_F))
+    if (CheckDownKey(KEY_INPUT_F))
     {
         nextScene = SceneType::Menu;
     }
 
     // Tキーでタイトル画面
-    if (CheckHitKey(KEY_INPUT_T))
+    if (CheckDownKey(KEY_INPUT_T))
     {
         nextScene = SceneType::Title;
+    }
+
+    // Gキーでタイトル画面
+    if (CheckDownKey(KEY_INPUT_G)) {
+
+        nextScene = SceneType::HowToPlay;
     }
 }
 
@@ -262,8 +269,10 @@ void TutorialScene::Draw()
 
     // 操作ガイドの描画（画面左下)
    // DrawBox(0, Screen::HEIGHT - 80, 300, Screen::HEIGHT, uiBg, TRUE);
+    DrawString(20, Screen::HEIGHT - 85, "Gキー：操作説明", white);
     DrawString(20, Screen::HEIGHT - 60, "Tキー：タイトルへ", white);
     DrawString(20, Screen::HEIGHT - 35, "Fキー：メニューへ", white);
+   
 
     // 現在のステップに応じた説明テキスト
     if (!isFading && !isStepComplete)

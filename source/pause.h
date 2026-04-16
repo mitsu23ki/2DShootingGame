@@ -26,7 +26,7 @@ public:
         // 選択（戻る）はスペースキー
         if (CheckDownKey(KEY_INPUT_SPACE)) {
             AudioManager::PlaySE(SEType::Select);
-            nextScene = SceneType::Menu;
+            nextScene = SceneType::Tutorial;
         }
     }
 
