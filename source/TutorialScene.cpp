@@ -10,7 +10,6 @@ TutorialScene::TutorialScene()
     nextStep(Step::Move),
     itemPhase(ItemPhase::Heal),
     messageTimer(0),
-    fadeAlpha(0),
     prevHP(0),
     nextScene(SceneType::None),
     canShoot(false),
@@ -29,7 +28,6 @@ void TutorialScene::Init()
     itemManager.Init();
 
     canShoot = false;
-    fadeAlpha = 0;
     isFading = false;
     isStepComplete = false;
     isWaitingNext = false;
@@ -37,7 +35,7 @@ void TutorialScene::Init()
     step = Step::Move;
     itemPhase = ItemPhase::Heal;
     enemyKilled = false;
-
+    fade.SetFadeIn(500);
     AudioManager::PlayBGM(BGMType::Game);
 }
 
@@ -63,16 +61,14 @@ void TutorialScene::Update()
     case Step::End:       UpdateEnd(); break;
     }
 
-    // フェード演出：暗転後に ChangeStep を呼び出し
-    if (isFading)
+    int deltaTime = 16;
+    fade.Update(deltaTime);
+
+    if (isFading && fade.IsFinished())
     {
-        fadeAlpha += 10;
-        if (fadeAlpha >= 255)
-        {
-            fadeAlpha = 255;
-            isFading = false;
-            ChangeStep(nextStep);
-        }
+        ChangeStep(nextStep);
+        fade.SetFadeIn(500);
+        isFading = false;
     }
 
     // ステップ完了後の入力待ち（Enterキーで次へ）
@@ -80,8 +76,8 @@ void TutorialScene::Update()
     {
         isWaitingNext = false;
         isStepComplete = false;
-        fadeAlpha = 0;
         isFading = true;
+        fade.SetFadeOut(500);
     }
 
     // Fキーでメニュー画面
@@ -204,8 +200,6 @@ void TutorialScene::ChangeStep(Step next)
 {
     isStepComplete = false;
     isWaitingNext = false;
-    fadeAlpha = 0;
-    isFading = false;
     step = next;
     messageTimer = 0;
 
@@ -331,9 +325,7 @@ void TutorialScene::Draw()
     }
 
     // シーン遷移用の暗転フェード描画
-    SetDrawBlendMode(DX_BLENDMODE_ALPHA, fadeAlpha);
-    DrawBox(0, 0, 1280, 720, GetColor(0, 0, 0), TRUE);
-    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    fade.Draw();
 }
 
 // 次シーン情報の取得

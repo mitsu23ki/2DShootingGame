@@ -13,7 +13,7 @@
 #include "LaserSystem.h"
 #include "ScoreManager.h"
 #include "ItemManager.h"
-
+#include "Fade.h"
 class TutorialScene : public Scene {
 public:
     TutorialScene();
@@ -37,7 +37,7 @@ private:
     };
     Step step;     // 現在のステップ
     Step nextStep; // フェード後に移行するステップ
-
+    Fade fade;
     // アイテム関連の状態
     enum class ItemPhase { Heal, Power, Wait };
     ItemPhase itemPhase;
@@ -50,7 +50,6 @@ private:
 
     // 演出・管理用
     bool isFading;       // フェード演出中か
-    int fadeAlpha;       // フェード用アルファ値
     int messageTimer;    // メッセージ表示用カウンタ
     int prevHP;          // HP変化検知用
     SceneType nextScene; // 最終的な遷移先シーン

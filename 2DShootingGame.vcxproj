@@ -32,6 +32,7 @@
     <ClInclude Include="source\EnemyManager.h" />
     <ClInclude Include="source\EnemyParam.h" />
     <ClInclude Include="source\EnemySpawner.h" />
+    <ClInclude Include="source\Fade.h" />
     <ClInclude Include="source\GameScene.h" />
     <ClInclude Include="source\pause.h" />
     <ClInclude Include="source\Item.h" />
@@ -60,6 +61,7 @@
     <ClCompile Include="source\EnemyManager.cpp" />
     <ClCompile Include="source\EnemyParam.cpp" />
     <ClCompile Include="source\EnemySpawner.cpp" />
+    <ClCompile Include="source\Fade.cpp" />
     <ClCompile Include="source\GameScene.cpp" />
     <ClCompile Include="source\Item.cpp" />
     <ClCompile Include="source\ItemManager.cpp" />
